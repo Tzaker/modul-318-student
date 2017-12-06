@@ -32,21 +32,20 @@ namespace TrafficSchedules
         private void tb_start_TextChanged(object sender, EventArgs e)
         {
             activetextbox = tb_start;
-            showStations(tb_start.Text, "start");            
+            showStations(tb_start.Text);            
         }
 
         private void tb_destination_TextChanged(object sender, EventArgs e)
         {
             activetextbox = tb_destination;
-            showStations(tb_destination.Text, "end");
+            showStations(tb_destination.Text);
 
         }
 
 
         //display station name suggestions in the stations listbox
-        public void showStations(String searchquery, String stationtype)
+        public void showStations(String searchquery)
         {
-
             
             Stations stationlist = route.GetStations(searchquery);
 
@@ -73,7 +72,7 @@ namespace TrafficSchedules
             dgv_connections.AutoSize = true;
 
             //columns to display in the datagridview
-            String[] columns = new String[] { "Von", "Bis", "Abfahrt", "Ankunft", "Dauer", "Gleis" };
+            String[] columns = new String[] { "Von", "Bis", "Abfahrt", "Ankunft", "Dauer", "Gleis"};
 
             //create the columns
             foreach (String col in columns)
@@ -85,13 +84,19 @@ namespace TrafficSchedules
             {
                 //add a new row for each connection
                 int row = dgv_connections.Rows.Add();
-                String[] values = new String[] 
+
+                //parse for prettier data
+                String departure = DateTime.Parse(c.From.Departure).ToString("HH:mm");
+                String arrival = DateTime.Parse(c.To.Arrival).ToString("HH:mm");
+                String duration = c.Duration.Substring(3, 2) + " h " + c.Duration.Substring(6, 2) + " min";
+
+                String[] values = new String[]
                 {
                     c.From.Station.Name,
                     c.To.Station.Name,
-                    c.From.Departure.Substring(12, 4),
-                    c.To.Arrival.Substring(12, 4),
-                    c.Duration.Substring(3, 5) + "h",
+                    departure,
+                    arrival,
+                    duration,
                     c.From.Platform
                 };
                 
@@ -102,11 +107,18 @@ namespace TrafficSchedules
                     dgv_connections.Rows[row].Cells[i].Value = values[i];
                 }
 
-
             }
+  
+        }
 
-            
-            
+        public void showDepartureTable()
+        {
+            /*
+            String departurestation = tb_start.Text;
+            String endpoint =
+
+            showConnections(departurestation, );
+            */
         }
 
         private void lbox_stations_Click(object sender, EventArgs e)
@@ -116,7 +128,14 @@ namespace TrafficSchedules
 
         private void bt_show_Click(object sender, EventArgs e)
         {
-            showConnections(tb_start.Text, tb_destination.Text);
+            if(rb_connections.Checked == true)
+            {
+                showConnections(tb_start.Text, tb_destination.Text);
+            }
+            else if (rb_departure.Checked == true)
+            {
+                showDepartureTable();
+            }
         }
 
         private void rb_departure_CheckedChanged(object sender, EventArgs e)
@@ -124,6 +143,7 @@ namespace TrafficSchedules
             tb_destination.Visible = false;
             lb_ziel.Visible = false;
             picbox_switchendstart.Visible = false;
+            lb_start.Text = "Abfahrtsort: ";
         }
 
         private void rb_connections_CheckedChanged(object sender, EventArgs e)
@@ -131,14 +151,24 @@ namespace TrafficSchedules
             tb_destination.Visible = true;
             lb_ziel.Visible = true;
             picbox_switchendstart.Visible = true;
+            lb_start.Text = "Start: ";
         }
 
         private void picbox_switchendstart_Click(object sender, EventArgs e)
         {
             String startpoint = tb_start.Text;
-
             tb_start.Text = tb_destination.Text;
             tb_destination.Text = startpoint;
+        }
+
+        private void bt_newsearch_Click(object sender, EventArgs e)
+        {
+            tb_start.Text = "";
+            tb_destination.Text = "";
+            lbox_stations.Items.Clear();
+            dgv_connections.Rows.Clear();
+            dgv_connections.Columns.Clear();
+
         }
     }
 }

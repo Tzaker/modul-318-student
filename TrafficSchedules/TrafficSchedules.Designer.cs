@@ -55,22 +55,22 @@
             this.lb_start.AutoSize = true;
             this.lb_start.Location = new System.Drawing.Point(13, 45);
             this.lb_start.Name = "lb_start";
-            this.lb_start.Size = new System.Drawing.Size(29, 13);
+            this.lb_start.Size = new System.Drawing.Size(32, 13);
             this.lb_start.TabIndex = 0;
-            this.lb_start.Text = "Start";
+            this.lb_start.Text = "Start:";
             // 
             // lb_ziel
             // 
             this.lb_ziel.AutoSize = true;
             this.lb_ziel.Location = new System.Drawing.Point(13, 120);
             this.lb_ziel.Name = "lb_ziel";
-            this.lb_ziel.Size = new System.Drawing.Size(24, 13);
+            this.lb_ziel.Size = new System.Drawing.Size(27, 13);
             this.lb_ziel.TabIndex = 1;
-            this.lb_ziel.Text = "Ziel";
+            this.lb_ziel.Text = "Ziel:";
             // 
             // tb_start
             // 
-            this.tb_start.Location = new System.Drawing.Point(94, 42);
+            this.tb_start.Location = new System.Drawing.Point(94, 45);
             this.tb_start.Name = "tb_start";
             this.tb_start.Size = new System.Drawing.Size(200, 20);
             this.tb_start.TabIndex = 1;
@@ -90,29 +90,29 @@
             this.grpbox_selection.Controls.Add(this.rb_nearme);
             this.grpbox_selection.Controls.Add(this.rb_departure);
             this.grpbox_selection.Controls.Add(this.rb_connections);
-            this.grpbox_selection.Location = new System.Drawing.Point(94, 234);
+            this.grpbox_selection.Location = new System.Drawing.Point(794, 45);
             this.grpbox_selection.Name = "grpbox_selection";
-            this.grpbox_selection.Size = new System.Drawing.Size(200, 120);
+            this.grpbox_selection.Size = new System.Drawing.Size(200, 98);
             this.grpbox_selection.TabIndex = 4;
             this.grpbox_selection.TabStop = false;
             // 
             // rb_nearme
             // 
             this.rb_nearme.AutoSize = true;
-            this.rb_nearme.Location = new System.Drawing.Point(6, 97);
+            this.rb_nearme.Location = new System.Drawing.Point(6, 66);
             this.rb_nearme.Name = "rb_nearme";
             this.rb_nearme.Size = new System.Drawing.Size(96, 17);
-            this.rb_nearme.TabIndex = 5;
+            this.rb_nearme.TabIndex = 6;
             this.rb_nearme.Text = "in meiner Nähe";
             this.rb_nearme.UseVisualStyleBackColor = true;
             // 
             // rb_departure
             // 
             this.rb_departure.AutoSize = true;
-            this.rb_departure.Location = new System.Drawing.Point(6, 58);
+            this.rb_departure.Location = new System.Drawing.Point(6, 43);
             this.rb_departure.Name = "rb_departure";
             this.rb_departure.Size = new System.Drawing.Size(147, 17);
-            this.rb_departure.TabIndex = 4;
+            this.rb_departure.TabIndex = 5;
             this.rb_departure.Text = "Abfahrtstabelle ab Startort";
             this.rb_departure.UseVisualStyleBackColor = true;
             this.rb_departure.CheckedChanged += new System.EventHandler(this.rb_departure_CheckedChanged);
@@ -124,7 +124,7 @@
             this.rb_connections.Location = new System.Drawing.Point(6, 19);
             this.rb_connections.Name = "rb_connections";
             this.rb_connections.Size = new System.Drawing.Size(91, 17);
-            this.rb_connections.TabIndex = 3;
+            this.rb_connections.TabIndex = 4;
             this.rb_connections.TabStop = true;
             this.rb_connections.Text = "Verbindungen";
             this.rb_connections.UseVisualStyleBackColor = true;
@@ -136,8 +136,8 @@
             this.lbox_stations.FormattingEnabled = true;
             this.lbox_stations.Location = new System.Drawing.Point(359, 45);
             this.lbox_stations.Name = "lbox_stations";
-            this.lbox_stations.Size = new System.Drawing.Size(635, 95);
-            this.lbox_stations.TabIndex = 6;
+            this.lbox_stations.Size = new System.Drawing.Size(389, 95);
+            this.lbox_stations.TabIndex = 3;
             this.lbox_stations.Click += new System.EventHandler(this.lbox_stations_Click);
             // 
             // bt_newsearch
@@ -150,6 +150,7 @@
             this.bt_newsearch.TabIndex = 9;
             this.bt_newsearch.Text = "Neue Suche";
             this.bt_newsearch.UseVisualStyleBackColor = true;
+            this.bt_newsearch.Click += new System.EventHandler(this.bt_newsearch_Click);
             // 
             // bt_show
             // 
@@ -166,7 +167,7 @@
             // 
             this.picbox_switchendstart.Image = ((System.Drawing.Image)(resources.GetObject("picbox_switchendstart.Image")));
             this.picbox_switchendstart.InitialImage = ((System.Drawing.Image)(resources.GetObject("picbox_switchendstart.InitialImage")));
-            this.picbox_switchendstart.Location = new System.Drawing.Point(171, 77);
+            this.picbox_switchendstart.Location = new System.Drawing.Point(180, 80);
             this.picbox_switchendstart.Name = "picbox_switchendstart";
             this.picbox_switchendstart.Size = new System.Drawing.Size(25, 25);
             this.picbox_switchendstart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -177,10 +178,10 @@
             // dgv_connections
             // 
             this.dgv_connections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_connections.Location = new System.Drawing.Point(359, 181);
+            this.dgv_connections.Location = new System.Drawing.Point(16, 181);
             this.dgv_connections.Name = "dgv_connections";
-            this.dgv_connections.Size = new System.Drawing.Size(635, 276);
-            this.dgv_connections.TabIndex = 11;
+            this.dgv_connections.Size = new System.Drawing.Size(978, 276);
+            this.dgv_connections.TabIndex = 7;
             // 
             // TrafficSchedules
             // 
@@ -200,7 +201,7 @@
             this.Controls.Add(this.lb_ziel);
             this.Controls.Add(this.lb_start);
             this.Name = "TrafficSchedules";
-            this.Text = "Form1";
+            this.Text = "Traffic Schedules - Swiss Transport";
             this.Load += new System.EventHandler(this.TrafficSchedules_Load);
             this.grpbox_selection.ResumeLayout(false);
             this.grpbox_selection.PerformLayout();
