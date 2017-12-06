@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrafficSchedules));
             this.lb_start = new System.Windows.Forms.Label();
             this.lb_ziel = new System.Windows.Forms.Label();
@@ -38,12 +39,15 @@
             this.rb_departure = new System.Windows.Forms.RadioButton();
             this.rb_connections = new System.Windows.Forms.RadioButton();
             this.lbox_stations = new System.Windows.Forms.ListBox();
-            this.lbox_connections = new System.Windows.Forms.ListBox();
             this.bt_newsearch = new System.Windows.Forms.Button();
             this.bt_show = new System.Windows.Forms.Button();
             this.picbox_switchendstart = new System.Windows.Forms.PictureBox();
+            this.dgv_connections = new System.Windows.Forms.DataGridView();
+            this.trafficSchedulesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.grpbox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_switchendstart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_connections)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trafficSchedulesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_start
@@ -78,6 +82,7 @@
             this.tb_destination.Name = "tb_destination";
             this.tb_destination.Size = new System.Drawing.Size(200, 20);
             this.tb_destination.TabIndex = 2;
+            this.tb_destination.TextChanged += new System.EventHandler(this.tb_destination_TextChanged);
             // 
             // grpbox_selection
             // 
@@ -110,6 +115,7 @@
             this.rb_departure.TabIndex = 4;
             this.rb_departure.Text = "Abfahrtstabelle ab Startort";
             this.rb_departure.UseVisualStyleBackColor = true;
+            this.rb_departure.CheckedChanged += new System.EventHandler(this.rb_departure_CheckedChanged);
             // 
             // rb_connections
             // 
@@ -122,32 +128,23 @@
             this.rb_connections.TabStop = true;
             this.rb_connections.Text = "Verbindungen";
             this.rb_connections.UseVisualStyleBackColor = true;
+            this.rb_connections.CheckedChanged += new System.EventHandler(this.rb_connections_CheckedChanged);
             // 
             // lbox_stations
             // 
             this.lbox_stations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbox_stations.FormattingEnabled = true;
-            this.lbox_stations.Location = new System.Drawing.Point(359, 42);
+            this.lbox_stations.Location = new System.Drawing.Point(359, 45);
             this.lbox_stations.Name = "lbox_stations";
-            this.lbox_stations.Size = new System.Drawing.Size(457, 95);
+            this.lbox_stations.Size = new System.Drawing.Size(635, 95);
             this.lbox_stations.TabIndex = 6;
-            // 
-            // lbox_connections
-            // 
-            this.lbox_connections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbox_connections.FormattingEnabled = true;
-            this.lbox_connections.Location = new System.Drawing.Point(359, 234);
-            this.lbox_connections.Name = "lbox_connections";
-            this.lbox_connections.Size = new System.Drawing.Size(457, 238);
-            this.lbox_connections.TabIndex = 7;
+            this.lbox_stations.Click += new System.EventHandler(this.lbox_stations_Click);
             // 
             // bt_newsearch
             // 
             this.bt_newsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_newsearch.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bt_newsearch.Location = new System.Drawing.Point(741, 497);
+            this.bt_newsearch.Location = new System.Drawing.Point(919, 497);
             this.bt_newsearch.Name = "bt_newsearch";
             this.bt_newsearch.Size = new System.Drawing.Size(75, 23);
             this.bt_newsearch.TabIndex = 9;
@@ -157,12 +154,13 @@
             // bt_show
             // 
             this.bt_show.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_show.Location = new System.Drawing.Point(647, 497);
+            this.bt_show.Location = new System.Drawing.Point(825, 497);
             this.bt_show.Name = "bt_show";
             this.bt_show.Size = new System.Drawing.Size(75, 23);
             this.bt_show.TabIndex = 8;
             this.bt_show.Text = "Anzeigen";
             this.bt_show.UseVisualStyleBackColor = true;
+            this.bt_show.Click += new System.EventHandler(this.bt_show_Click);
             // 
             // picbox_switchendstart
             // 
@@ -174,6 +172,15 @@
             this.picbox_switchendstart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picbox_switchendstart.TabIndex = 10;
             this.picbox_switchendstart.TabStop = false;
+            this.picbox_switchendstart.Click += new System.EventHandler(this.picbox_switchendstart_Click);
+            // 
+            // dgv_connections
+            // 
+            this.dgv_connections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_connections.Location = new System.Drawing.Point(359, 181);
+            this.dgv_connections.Name = "dgv_connections";
+            this.dgv_connections.Size = new System.Drawing.Size(635, 276);
+            this.dgv_connections.TabIndex = 11;
             // 
             // TrafficSchedules
             // 
@@ -181,11 +188,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bt_newsearch;
-            this.ClientSize = new System.Drawing.Size(884, 561);
+            this.ClientSize = new System.Drawing.Size(1062, 561);
+            this.Controls.Add(this.dgv_connections);
             this.Controls.Add(this.picbox_switchendstart);
             this.Controls.Add(this.bt_show);
             this.Controls.Add(this.bt_newsearch);
-            this.Controls.Add(this.lbox_connections);
             this.Controls.Add(this.lbox_stations);
             this.Controls.Add(this.grpbox_selection);
             this.Controls.Add(this.tb_destination);
@@ -198,6 +205,8 @@
             this.grpbox_selection.ResumeLayout(false);
             this.grpbox_selection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_switchendstart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_connections)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trafficSchedulesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,10 +223,11 @@
         private System.Windows.Forms.RadioButton rb_departure;
         private System.Windows.Forms.RadioButton rb_connections;
         private System.Windows.Forms.ListBox lbox_stations;
-        private System.Windows.Forms.ListBox lbox_connections;
         private System.Windows.Forms.Button bt_newsearch;
         private System.Windows.Forms.Button bt_show;
         private System.Windows.Forms.PictureBox picbox_switchendstart;
+        private System.Windows.Forms.DataGridView dgv_connections;
+        private System.Windows.Forms.BindingSource trafficSchedulesBindingSource;
     }
 }
 
