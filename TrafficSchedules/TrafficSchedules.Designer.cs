@@ -32,18 +32,18 @@
             this.lb_start = new System.Windows.Forms.Label();
             this.lb_ziel = new System.Windows.Forms.Label();
             this.tb_start = new System.Windows.Forms.TextBox();
-            this.tb_ziel = new System.Windows.Forms.TextBox();
+            this.tb_destination = new System.Windows.Forms.TextBox();
             this.grpbox_selection = new System.Windows.Forms.GroupBox();
-            this.rb_verbindungen = new System.Windows.Forms.RadioButton();
-            this.rb_abfahrt = new System.Windows.Forms.RadioButton();
-            this.rb_nahe = new System.Windows.Forms.RadioButton();
-            this.lbox_haltestellen = new System.Windows.Forms.ListBox();
-            this.lbox_verbindungen = new System.Windows.Forms.ListBox();
-            this.bt_neuesuche = new System.Windows.Forms.Button();
-            this.bt_anzeigen = new System.Windows.Forms.Button();
-            this.picbox_wechslestartziel = new System.Windows.Forms.PictureBox();
+            this.rb_nearme = new System.Windows.Forms.RadioButton();
+            this.rb_departure = new System.Windows.Forms.RadioButton();
+            this.rb_connections = new System.Windows.Forms.RadioButton();
+            this.lbox_stations = new System.Windows.Forms.ListBox();
+            this.lbox_connections = new System.Windows.Forms.ListBox();
+            this.bt_newsearch = new System.Windows.Forms.Button();
+            this.bt_show = new System.Windows.Forms.Button();
+            this.picbox_switchendstart = new System.Windows.Forms.PictureBox();
             this.grpbox_selection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picbox_wechslestartziel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox_switchendstart)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_start
@@ -70,124 +70,125 @@
             this.tb_start.Name = "tb_start";
             this.tb_start.Size = new System.Drawing.Size(200, 20);
             this.tb_start.TabIndex = 1;
+            this.tb_start.TextChanged += new System.EventHandler(this.tb_start_TextChanged);
             // 
-            // tb_ziel
+            // tb_destination
             // 
-            this.tb_ziel.Location = new System.Drawing.Point(94, 117);
-            this.tb_ziel.Name = "tb_ziel";
-            this.tb_ziel.Size = new System.Drawing.Size(200, 20);
-            this.tb_ziel.TabIndex = 2;
+            this.tb_destination.Location = new System.Drawing.Point(94, 117);
+            this.tb_destination.Name = "tb_destination";
+            this.tb_destination.Size = new System.Drawing.Size(200, 20);
+            this.tb_destination.TabIndex = 2;
             // 
             // grpbox_selection
             // 
             this.grpbox_selection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.grpbox_selection.Controls.Add(this.rb_nahe);
-            this.grpbox_selection.Controls.Add(this.rb_abfahrt);
-            this.grpbox_selection.Controls.Add(this.rb_verbindungen);
+            this.grpbox_selection.Controls.Add(this.rb_nearme);
+            this.grpbox_selection.Controls.Add(this.rb_departure);
+            this.grpbox_selection.Controls.Add(this.rb_connections);
             this.grpbox_selection.Location = new System.Drawing.Point(94, 234);
             this.grpbox_selection.Name = "grpbox_selection";
             this.grpbox_selection.Size = new System.Drawing.Size(200, 120);
             this.grpbox_selection.TabIndex = 4;
             this.grpbox_selection.TabStop = false;
             // 
-            // rb_verbindungen
+            // rb_nearme
             // 
-            this.rb_verbindungen.AutoSize = true;
-            this.rb_verbindungen.Checked = true;
-            this.rb_verbindungen.Location = new System.Drawing.Point(6, 19);
-            this.rb_verbindungen.Name = "rb_verbindungen";
-            this.rb_verbindungen.Size = new System.Drawing.Size(91, 17);
-            this.rb_verbindungen.TabIndex = 3;
-            this.rb_verbindungen.TabStop = true;
-            this.rb_verbindungen.Text = "Verbindungen";
-            this.rb_verbindungen.UseVisualStyleBackColor = true;
+            this.rb_nearme.AutoSize = true;
+            this.rb_nearme.Location = new System.Drawing.Point(6, 97);
+            this.rb_nearme.Name = "rb_nearme";
+            this.rb_nearme.Size = new System.Drawing.Size(96, 17);
+            this.rb_nearme.TabIndex = 5;
+            this.rb_nearme.Text = "in meiner Nähe";
+            this.rb_nearme.UseVisualStyleBackColor = true;
             // 
-            // rb_abfahrt
+            // rb_departure
             // 
-            this.rb_abfahrt.AutoSize = true;
-            this.rb_abfahrt.Location = new System.Drawing.Point(6, 58);
-            this.rb_abfahrt.Name = "rb_abfahrt";
-            this.rb_abfahrt.Size = new System.Drawing.Size(147, 17);
-            this.rb_abfahrt.TabIndex = 4;
-            this.rb_abfahrt.Text = "Abfahrtstabelle ab Startort";
-            this.rb_abfahrt.UseVisualStyleBackColor = true;
+            this.rb_departure.AutoSize = true;
+            this.rb_departure.Location = new System.Drawing.Point(6, 58);
+            this.rb_departure.Name = "rb_departure";
+            this.rb_departure.Size = new System.Drawing.Size(147, 17);
+            this.rb_departure.TabIndex = 4;
+            this.rb_departure.Text = "Abfahrtstabelle ab Startort";
+            this.rb_departure.UseVisualStyleBackColor = true;
             // 
-            // rb_nahe
+            // rb_connections
             // 
-            this.rb_nahe.AutoSize = true;
-            this.rb_nahe.Location = new System.Drawing.Point(6, 97);
-            this.rb_nahe.Name = "rb_nahe";
-            this.rb_nahe.Size = new System.Drawing.Size(96, 17);
-            this.rb_nahe.TabIndex = 5;
-            this.rb_nahe.Text = "in meiner Nähe";
-            this.rb_nahe.UseVisualStyleBackColor = true;
+            this.rb_connections.AutoSize = true;
+            this.rb_connections.Checked = true;
+            this.rb_connections.Location = new System.Drawing.Point(6, 19);
+            this.rb_connections.Name = "rb_connections";
+            this.rb_connections.Size = new System.Drawing.Size(91, 17);
+            this.rb_connections.TabIndex = 3;
+            this.rb_connections.TabStop = true;
+            this.rb_connections.Text = "Verbindungen";
+            this.rb_connections.UseVisualStyleBackColor = true;
             // 
-            // lbox_haltestellen
+            // lbox_stations
             // 
-            this.lbox_haltestellen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbox_haltestellen.FormattingEnabled = true;
-            this.lbox_haltestellen.Location = new System.Drawing.Point(359, 42);
-            this.lbox_haltestellen.Name = "lbox_haltestellen";
-            this.lbox_haltestellen.Size = new System.Drawing.Size(457, 95);
-            this.lbox_haltestellen.TabIndex = 6;
+            this.lbox_stations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbox_stations.FormattingEnabled = true;
+            this.lbox_stations.Location = new System.Drawing.Point(359, 42);
+            this.lbox_stations.Name = "lbox_stations";
+            this.lbox_stations.Size = new System.Drawing.Size(457, 95);
+            this.lbox_stations.TabIndex = 6;
             // 
-            // lbox_verbindungen
+            // lbox_connections
             // 
-            this.lbox_verbindungen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lbox_connections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbox_verbindungen.FormattingEnabled = true;
-            this.lbox_verbindungen.Location = new System.Drawing.Point(359, 234);
-            this.lbox_verbindungen.Name = "lbox_verbindungen";
-            this.lbox_verbindungen.Size = new System.Drawing.Size(457, 238);
-            this.lbox_verbindungen.TabIndex = 7;
+            this.lbox_connections.FormattingEnabled = true;
+            this.lbox_connections.Location = new System.Drawing.Point(359, 234);
+            this.lbox_connections.Name = "lbox_connections";
+            this.lbox_connections.Size = new System.Drawing.Size(457, 238);
+            this.lbox_connections.TabIndex = 7;
             // 
-            // bt_neuesuche
+            // bt_newsearch
             // 
-            this.bt_neuesuche.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_neuesuche.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bt_neuesuche.Location = new System.Drawing.Point(741, 497);
-            this.bt_neuesuche.Name = "bt_neuesuche";
-            this.bt_neuesuche.Size = new System.Drawing.Size(75, 23);
-            this.bt_neuesuche.TabIndex = 9;
-            this.bt_neuesuche.Text = "Neue Suche";
-            this.bt_neuesuche.UseVisualStyleBackColor = true;
+            this.bt_newsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_newsearch.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.bt_newsearch.Location = new System.Drawing.Point(741, 497);
+            this.bt_newsearch.Name = "bt_newsearch";
+            this.bt_newsearch.Size = new System.Drawing.Size(75, 23);
+            this.bt_newsearch.TabIndex = 9;
+            this.bt_newsearch.Text = "Neue Suche";
+            this.bt_newsearch.UseVisualStyleBackColor = true;
             // 
-            // bt_anzeigen
+            // bt_show
             // 
-            this.bt_anzeigen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_anzeigen.Location = new System.Drawing.Point(647, 497);
-            this.bt_anzeigen.Name = "bt_anzeigen";
-            this.bt_anzeigen.Size = new System.Drawing.Size(75, 23);
-            this.bt_anzeigen.TabIndex = 8;
-            this.bt_anzeigen.Text = "Anzeigen";
-            this.bt_anzeigen.UseVisualStyleBackColor = true;
+            this.bt_show.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_show.Location = new System.Drawing.Point(647, 497);
+            this.bt_show.Name = "bt_show";
+            this.bt_show.Size = new System.Drawing.Size(75, 23);
+            this.bt_show.TabIndex = 8;
+            this.bt_show.Text = "Anzeigen";
+            this.bt_show.UseVisualStyleBackColor = true;
             // 
-            // picbox_wechslestartziel
+            // picbox_switchendstart
             // 
-            this.picbox_wechslestartziel.Image = ((System.Drawing.Image)(resources.GetObject("picbox_wechslestartziel.Image")));
-            this.picbox_wechslestartziel.InitialImage = ((System.Drawing.Image)(resources.GetObject("picbox_wechslestartziel.InitialImage")));
-            this.picbox_wechslestartziel.Location = new System.Drawing.Point(171, 77);
-            this.picbox_wechslestartziel.Name = "picbox_wechslestartziel";
-            this.picbox_wechslestartziel.Size = new System.Drawing.Size(25, 25);
-            this.picbox_wechslestartziel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picbox_wechslestartziel.TabIndex = 10;
-            this.picbox_wechslestartziel.TabStop = false;
+            this.picbox_switchendstart.Image = ((System.Drawing.Image)(resources.GetObject("picbox_switchendstart.Image")));
+            this.picbox_switchendstart.InitialImage = ((System.Drawing.Image)(resources.GetObject("picbox_switchendstart.InitialImage")));
+            this.picbox_switchendstart.Location = new System.Drawing.Point(171, 77);
+            this.picbox_switchendstart.Name = "picbox_switchendstart";
+            this.picbox_switchendstart.Size = new System.Drawing.Size(25, 25);
+            this.picbox_switchendstart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picbox_switchendstart.TabIndex = 10;
+            this.picbox_switchendstart.TabStop = false;
             // 
             // TrafficSchedules
             // 
-            this.AcceptButton = this.bt_anzeigen;
+            this.AcceptButton = this.bt_show;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.bt_neuesuche;
+            this.CancelButton = this.bt_newsearch;
             this.ClientSize = new System.Drawing.Size(884, 561);
-            this.Controls.Add(this.picbox_wechslestartziel);
-            this.Controls.Add(this.bt_anzeigen);
-            this.Controls.Add(this.bt_neuesuche);
-            this.Controls.Add(this.lbox_verbindungen);
-            this.Controls.Add(this.lbox_haltestellen);
+            this.Controls.Add(this.picbox_switchendstart);
+            this.Controls.Add(this.bt_show);
+            this.Controls.Add(this.bt_newsearch);
+            this.Controls.Add(this.lbox_connections);
+            this.Controls.Add(this.lbox_stations);
             this.Controls.Add(this.grpbox_selection);
-            this.Controls.Add(this.tb_ziel);
+            this.Controls.Add(this.tb_destination);
             this.Controls.Add(this.tb_start);
             this.Controls.Add(this.lb_ziel);
             this.Controls.Add(this.lb_start);
@@ -196,7 +197,7 @@
             this.Load += new System.EventHandler(this.TrafficSchedules_Load);
             this.grpbox_selection.ResumeLayout(false);
             this.grpbox_selection.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picbox_wechslestartziel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox_switchendstart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,16 +208,16 @@
         private System.Windows.Forms.Label lb_start;
         private System.Windows.Forms.Label lb_ziel;
         private System.Windows.Forms.TextBox tb_start;
-        private System.Windows.Forms.TextBox tb_ziel;
+        private System.Windows.Forms.TextBox tb_destination;
         private System.Windows.Forms.GroupBox grpbox_selection;
-        private System.Windows.Forms.RadioButton rb_nahe;
-        private System.Windows.Forms.RadioButton rb_abfahrt;
-        private System.Windows.Forms.RadioButton rb_verbindungen;
-        private System.Windows.Forms.ListBox lbox_haltestellen;
-        private System.Windows.Forms.ListBox lbox_verbindungen;
-        private System.Windows.Forms.Button bt_neuesuche;
-        private System.Windows.Forms.Button bt_anzeigen;
-        private System.Windows.Forms.PictureBox picbox_wechslestartziel;
+        private System.Windows.Forms.RadioButton rb_nearme;
+        private System.Windows.Forms.RadioButton rb_departure;
+        private System.Windows.Forms.RadioButton rb_connections;
+        private System.Windows.Forms.ListBox lbox_stations;
+        private System.Windows.Forms.ListBox lbox_connections;
+        private System.Windows.Forms.Button bt_newsearch;
+        private System.Windows.Forms.Button bt_show;
+        private System.Windows.Forms.PictureBox picbox_switchendstart;
     }
 }
 
