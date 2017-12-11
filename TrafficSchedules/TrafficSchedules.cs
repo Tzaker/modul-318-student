@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SwissTransport;
+using System.Net.Mail;
 
 namespace TrafficSchedules
 {
@@ -74,7 +75,7 @@ namespace TrafficSchedules
 
         public void showConnections(String startpoint, String endpoint)
         {
-
+            
             Connections conlist = route.GetConnections(startpoint, endpoint, getDate(), getTime());
 
             //clear previous entries
@@ -86,8 +87,8 @@ namespace TrafficSchedules
 
             foreach (Connection c in conlist.ConnectionList)
             {
-                //add a new row for each connection
-                int row = dgv_connections.Rows.Add();
+                
+                int row = addRowtoDataGridView();
 
                 //parse for prettier data
                 String departure = DateTime.Parse(c.From.Departure).ToString("HH:mm");
@@ -105,15 +106,18 @@ namespace TrafficSchedules
                 };
 
                 FillDataGrid(values, row);
-
+                startpoint = c.From.Station.Name;
+                endpoint = c.To.Station.Name;
             }
-
+            tb_start.Text = startpoint;
+            tb_destination.Text = endpoint;
         }
 
         public void showDepartureTable()
         {
-            
-            String departurestation = tb_start.Text;
+
+            String departurestation = lbox_stations.Items[0].ToString();
+            tb_start.Text = departurestation;
             StationBoardRoot sbroot = route.GetStationBoard(departurestation, getDate() + getTime());
 
             clearDGVEntries();
@@ -123,7 +127,7 @@ namespace TrafficSchedules
 
             foreach (StationBoard sb in sbroot.Entries)
             {
-                int row = dgv_connections.Rows.Add();
+                int row = addRowtoDataGridView();
 
                 String[] stationboardproperties = new String[]
                 {
@@ -138,6 +142,12 @@ namespace TrafficSchedules
                 
             }
             
+        }
+
+        public int addRowtoDataGridView()
+        {
+            int i = dgv_connections.Rows.Add();
+            return i;
         }
 
         public void CreateDataGridViewColumns(String[] displayedcolumns)
@@ -164,13 +174,29 @@ namespace TrafficSchedules
 
         public String getTime()
         {
-
             return datetimepicker.Value.ToString("HH:mm");
         }
 
         public String getDate()
         {
             return datetimepicker.Value.ToString("yyyy-MM-dd");
+        }
+
+        public void ClearForm()
+        {
+            tb_start.Text = "";
+            tb_destination.Text = "";
+            lbox_stations.Items.Clear();
+            dgv_connections.Rows.Clear();
+            dgv_connections.Columns.Clear();
+            datetimepicker.Value = DateTime.Now;
+        }
+
+        public void clearDGVEntries()
+        {
+            //clear previous entries
+            dgv_connections.Rows.Clear();
+            dgv_connections.Columns.Clear();
         }
 
         //listbox stations events
@@ -183,20 +209,45 @@ namespace TrafficSchedules
         {
             if (e.KeyCode == Keys.Space)
             {
+                if(lbox_stations.SelectedItem != null)
+                {
                 activetextbox.Text = lbox_stations.SelectedItem.ToString();
+                }
             }
         }
 
         private void bt_show_Click(object sender, EventArgs e)
         {
-            if(rb_connections.Checked == true)
+            try
             {
-                showConnections(tb_start.Text, tb_destination.Text);
-            }
-            else if (rb_departure.Checked == true)
+
+                if (rb_connections.Checked == true)
+                {
+                    showConnections(tb_start.Text, tb_destination.Text);
+                }
+                else if (rb_departure.Checked == true)
+                {
+                    showDepartureTable();
+                }
+                
+            } catch(Exception ex)
             {
-                showDepartureTable();
+                String converterror = "Error converting value";
+                if (ex.Message.Substring(0, 22) == converterror)
+                {
+                MessageBox.Show("Bitte verwenden Sie nur Bahnhöfe oder Bushaltestellen. Eine oder mehrere Adressen sind ungültig.");
+                }
+                ClearForm();
+                return;
             }
+
+            if (dgv_connections.Rows.Count <= 1)
+            {
+                MessageBox.Show("Es wurden keine Verbindungen gefunden. Nur Daten des aktuellen Fahrplanjahres sind verfügbar. Stellen Sie ausserdem sicher, dass der Abfahrts- und Zielort existieren.");
+                datetimepicker.Value = DateTime.Now;
+                return;
+            }
+
         }
 
         private void rb_departure_CheckedChanged(object sender, EventArgs e)
@@ -225,21 +276,75 @@ namespace TrafficSchedules
 
         private void bt_newsearch_Click(object sender, EventArgs e)
         {
-            tb_start.Text = "";
-            tb_destination.Text = "";
-            lbox_stations.Items.Clear();
-            dgv_connections.Rows.Clear();
-            dgv_connections.Columns.Clear();
-
-        }
-
-        public void clearDGVEntries()
-        {
-            //clear previous entries
-            dgv_connections.Rows.Clear();
-            dgv_connections.Columns.Clear();
+            ClearForm();
         }
 
         
+        private void bt_email_Click(object sender, EventArgs e)
+        {
+            //Show Prompt to enter email address
+            emailprompt prompt = new emailprompt();
+            String recipientemail = "";
+
+            if (prompt.ShowDialog(this) == DialogResult.OK)
+            {
+                recipientemail = prompt.tb_emailaddress.Text;
+            } else
+            {
+                return;
+            }
+
+            prompt.Dispose();
+
+            /* iterate through the rows from the datagridview 
+             * convert the data into an html table to be able to keep the formatting
+             */
+            String datatable = "<table width='100%' style='border:Solid 1px Black;'>";
+
+            foreach (DataGridViewRow row in dgv_connections.Rows)
+            {
+                datatable += "<tr>";
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    datatable += "<td style='color:orange;'>" + cell.Value + "</td>";
+                }
+                datatable += "</tr>";
+            }
+            datatable += "</table>";
+
+            MailAddress senderaddress = new MailAddress("trafficschedules@gmail.com", "Traffic Schedules");
+            MailAddress recipientaddress = new MailAddress(recipientemail);
+            SendEmail(senderaddress, recipientaddress, datatable);
+        }
+
+        public void SendEmail(MailAddress sender, MailAddress recipient, String message)
+        {
+            //create a new smtp client and add the credentials
+            //from a google account created for this project
+            SmtpClient smtpcl = new SmtpClient();
+            smtpcl.Host = "smtp.gmail.com";
+            smtpcl.EnableSsl = true;
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("trafficschedules@gmail.com", "lgTPve7u8G06");
+            smtpcl.Credentials = credentials;
+
+            //create the message to send
+            MailMessage msgtosend = new MailMessage();
+            msgtosend.From = sender;
+            msgtosend.To.Add(recipient);
+            msgtosend.Subject = "Exported Traffic Schedules";
+            msgtosend.Body = message;
+            msgtosend.IsBodyHtml = true;
+            try
+            {
+                smtpcl.Send(msgtosend);
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+            
+            msgtosend.Dispose();
+        }
     }
 }

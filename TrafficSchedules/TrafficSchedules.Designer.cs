@@ -42,13 +42,17 @@
             this.bt_show = new System.Windows.Forms.Button();
             this.picbox_switchendstart = new System.Windows.Forms.PictureBox();
             this.dgv_connections = new System.Windows.Forms.DataGridView();
-            this.trafficSchedulesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lb_date = new System.Windows.Forms.Label();
             this.datetimepicker = new System.Windows.Forms.DateTimePicker();
+            this.bt_shownearme = new System.Windows.Forms.Button();
+            this.bt_email = new System.Windows.Forms.Button();
+            this.trafficSchedulesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.grpbox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_switchendstart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_connections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trafficSchedulesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_start
@@ -92,16 +96,16 @@
             this.grpbox_selection.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.grpbox_selection.Controls.Add(this.rb_departure);
             this.grpbox_selection.Controls.Add(this.rb_connections);
-            this.grpbox_selection.Location = new System.Drawing.Point(794, 48);
+            this.grpbox_selection.Location = new System.Drawing.Point(840, 45);
             this.grpbox_selection.Name = "grpbox_selection";
-            this.grpbox_selection.Size = new System.Drawing.Size(246, 70);
+            this.grpbox_selection.Size = new System.Drawing.Size(199, 51);
             this.grpbox_selection.TabIndex = 4;
             this.grpbox_selection.TabStop = false;
             // 
             // rb_departure
             // 
             this.rb_departure.AutoSize = true;
-            this.rb_departure.Location = new System.Drawing.Point(0, 42);
+            this.rb_departure.Location = new System.Drawing.Point(0, 26);
             this.rb_departure.Name = "rb_departure";
             this.rb_departure.Size = new System.Drawing.Size(147, 17);
             this.rb_departure.TabIndex = 5;
@@ -113,7 +117,7 @@
             // 
             this.rb_connections.AutoSize = true;
             this.rb_connections.Checked = true;
-            this.rb_connections.Location = new System.Drawing.Point(0, 19);
+            this.rb_connections.Location = new System.Drawing.Point(0, 3);
             this.rb_connections.Name = "rb_connections";
             this.rb_connections.Size = new System.Drawing.Size(91, 17);
             this.rb_connections.TabIndex = 4;
@@ -128,7 +132,7 @@
             this.lbox_stations.FormattingEnabled = true;
             this.lbox_stations.Location = new System.Drawing.Point(349, 45);
             this.lbox_stations.Name = "lbox_stations";
-            this.lbox_stations.Size = new System.Drawing.Size(389, 121);
+            this.lbox_stations.Size = new System.Drawing.Size(456, 121);
             this.lbox_stations.TabIndex = 3;
             this.lbox_stations.Click += new System.EventHandler(this.lbox_stations_Click);
             this.lbox_stations.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbox_stations_KeyDown);
@@ -137,7 +141,7 @@
             // 
             this.bt_newsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_newsearch.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bt_newsearch.Location = new System.Drawing.Point(965, 497);
+            this.bt_newsearch.Location = new System.Drawing.Point(964, 516);
             this.bt_newsearch.Name = "bt_newsearch";
             this.bt_newsearch.Size = new System.Drawing.Size(75, 23);
             this.bt_newsearch.TabIndex = 9;
@@ -148,7 +152,7 @@
             // bt_show
             // 
             this.bt_show.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_show.Location = new System.Drawing.Point(872, 497);
+            this.bt_show.Location = new System.Drawing.Point(868, 516);
             this.bt_show.Name = "bt_show";
             this.bt_show.Size = new System.Drawing.Size(75, 23);
             this.bt_show.TabIndex = 8;
@@ -174,8 +178,10 @@
             this.dgv_connections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_connections.Location = new System.Drawing.Point(16, 197);
             this.dgv_connections.Name = "dgv_connections";
-            this.dgv_connections.Size = new System.Drawing.Size(1024, 294);
+            this.dgv_connections.ReadOnly = true;
+            this.dgv_connections.Size = new System.Drawing.Size(789, 294);
             this.dgv_connections.TabIndex = 7;
+            this.dgv_connections.TabStop = false;
             // 
             // lb_date
             // 
@@ -195,6 +201,33 @@
             this.datetimepicker.Size = new System.Drawing.Size(228, 20);
             this.datetimepicker.TabIndex = 13;
             // 
+            // bt_shownearme
+            // 
+            this.bt_shownearme.Location = new System.Drawing.Point(840, 105);
+            this.bt_shownearme.Name = "bt_shownearme";
+            this.bt_shownearme.Size = new System.Drawing.Size(199, 23);
+            this.bt_shownearme.TabIndex = 14;
+            this.bt_shownearme.Text = "Stationen in der Nähe";
+            this.bt_shownearme.UseVisualStyleBackColor = true;
+            // 
+            // bt_email
+            // 
+            this.bt_email.Location = new System.Drawing.Point(840, 142);
+            this.bt_email.Name = "bt_email";
+            this.bt_email.Size = new System.Drawing.Size(199, 23);
+            this.bt_email.TabIndex = 15;
+            this.bt_email.Text = "Daten per Email exportieren";
+            this.bt_email.UseVisualStyleBackColor = true;
+            this.bt_email.Click += new System.EventHandler(this.bt_email_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(840, 197);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(199, 294);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
             // TrafficSchedules
             // 
             this.AcceptButton = this.bt_show;
@@ -202,6 +235,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bt_newsearch;
             this.ClientSize = new System.Drawing.Size(1062, 561);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.bt_email);
+            this.Controls.Add(this.bt_shownearme);
             this.Controls.Add(this.datetimepicker);
             this.Controls.Add(this.lb_date);
             this.Controls.Add(this.dgv_connections);
@@ -222,6 +258,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picbox_switchendstart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_connections)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trafficSchedulesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,6 +281,9 @@
         private System.Windows.Forms.BindingSource trafficSchedulesBindingSource;
         private System.Windows.Forms.Label lb_date;
         private System.Windows.Forms.DateTimePicker datetimepicker;
+        private System.Windows.Forms.Button bt_shownearme;
+        private System.Windows.Forms.Button bt_email;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
