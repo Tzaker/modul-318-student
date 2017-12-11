@@ -92,7 +92,7 @@
             this.grpbox_selection.Controls.Add(this.rb_connections);
             this.grpbox_selection.Location = new System.Drawing.Point(794, 45);
             this.grpbox_selection.Name = "grpbox_selection";
-            this.grpbox_selection.Size = new System.Drawing.Size(200, 98);
+            this.grpbox_selection.Size = new System.Drawing.Size(246, 98);
             this.grpbox_selection.TabIndex = 4;
             this.grpbox_selection.TabStop = false;
             // 
@@ -144,7 +144,7 @@
             // 
             this.bt_newsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_newsearch.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bt_newsearch.Location = new System.Drawing.Point(919, 497);
+            this.bt_newsearch.Location = new System.Drawing.Point(965, 497);
             this.bt_newsearch.Name = "bt_newsearch";
             this.bt_newsearch.Size = new System.Drawing.Size(75, 23);
             this.bt_newsearch.TabIndex = 9;
@@ -155,7 +155,7 @@
             // bt_show
             // 
             this.bt_show.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_show.Location = new System.Drawing.Point(825, 497);
+            this.bt_show.Location = new System.Drawing.Point(872, 497);
             this.bt_show.Name = "bt_show";
             this.bt_show.Size = new System.Drawing.Size(75, 23);
             this.bt_show.TabIndex = 8;
@@ -180,7 +180,7 @@
             this.dgv_connections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_connections.Location = new System.Drawing.Point(16, 181);
             this.dgv_connections.Name = "dgv_connections";
-            this.dgv_connections.Size = new System.Drawing.Size(978, 276);
+            this.dgv_connections.Size = new System.Drawing.Size(1024, 276);
             this.dgv_connections.TabIndex = 7;
             // 
             // TrafficSchedules
