@@ -28,6 +28,7 @@ namespace TrafficSchedules
 
         }
 
+        //textbox start events
         //Provide search suggestions while typing
         private void tb_start_TextChanged(object sender, EventArgs e)
         {
@@ -35,6 +36,13 @@ namespace TrafficSchedules
             showStations(tb_start.Text);            
         }
 
+        private void tb_start_Click(object sender, EventArgs e)
+        {
+            activetextbox = tb_start;
+            tb_start.Clear();
+        }
+
+        //textbox destination/ziel events
         private void tb_destination_TextChanged(object sender, EventArgs e)
         {
             activetextbox = tb_destination;
@@ -42,6 +50,11 @@ namespace TrafficSchedules
 
         }
 
+        private void tb_destination_Click(object sender, EventArgs e)
+        {
+            activetextbox = tb_destination;
+            tb_destination.Clear();
+        }
 
         //display station name suggestions in the stations listbox
         public void showStations(String searchquery)
@@ -61,26 +74,16 @@ namespace TrafficSchedules
 
         public void showConnections(String startpoint, String endpoint)
         {
-
             Connections conlist = route.GetConnections(startpoint, endpoint);
 
             //clear previous entries
-            dgv_connections.Rows.Clear();
-            dgv_connections.Columns.Clear();
-
-            //adjust size
-            dgv_connections.AutoSize = true;
+            clearDGVEntries();
 
             //columns to display in the datagridview
             String[] columns = new String[] { "Von", "Bis", "Abfahrt", "Ankunft", "Dauer", "Gleis"};
+            CreateDataGridViewColumns(columns);
 
-            //create the columns
-            foreach (String col in columns)
-            {
-                dgv_connections.Columns.Add(col, col);
-            }
-
-            foreach(Connection c in conlist.ConnectionList)
+            foreach (Connection c in conlist.ConnectionList)
             {
                 //add a new row for each connection
                 int row = dgv_connections.Rows.Add();
@@ -99,26 +102,62 @@ namespace TrafficSchedules
                     duration,
                     c.From.Platform
                 };
-                
-                //iterate through the columns
-                for(int i = 0; i < values.Count(); i++)
-                {
-                    //fill in the data
-                    dgv_connections.Rows[row].Cells[i].Value = values[i];
-                }
+
+                FillDataGrid(values, row);
 
             }
-  
+
         }
 
         public void showDepartureTable()
         {
-            /*
+            
             String departurestation = tb_start.Text;
-            String endpoint =
+            StationBoardRoot sbroot = route.GetStationBoard(departurestation);
 
-            showConnections(departurestation, );
-            */
+            clearDGVEntries();
+
+            String[] stationboardcolumns = new String[] { "Abfahrt", "Nach", "Linie", "Betreiber" };
+            CreateDataGridViewColumns(stationboardcolumns);
+
+            foreach (StationBoard sb in sbroot.Entries)
+            {
+                int row = dgv_connections.Rows.Add();
+
+                String[] stationboardproperties = new String[]
+                {
+                    sb.Stop.Departure.ToShortTimeString(),
+                    sb.To,
+                    sb.Number,
+                    sb.Operator
+                };
+
+                FillDataGrid(stationboardproperties, row);
+                
+            }
+            
+        }
+
+        public void CreateDataGridViewColumns(String[] displayedcolumns)
+        {
+            //create the columns
+            foreach (String col in displayedcolumns)
+            {
+                dgv_connections.Columns.Add(col, col);
+            }
+        }
+
+        //fill in the data. requires columns to be set by CreateDataGridViewColumns
+        public void FillDataGrid(String[] valuesarray, int rowindex)
+        {
+        
+            //iterate through the columns
+            for (int i = 0; i < valuesarray.Count(); i++)
+            {
+                //fill in the data
+                dgv_connections.Rows[rowindex].Cells[i].Value = valuesarray[i];
+                    
+            }
         }
 
         private void lbox_stations_Click(object sender, EventArgs e)
@@ -159,6 +198,7 @@ namespace TrafficSchedules
             String startpoint = tb_start.Text;
             tb_start.Text = tb_destination.Text;
             tb_destination.Text = startpoint;
+            bt_show.PerformClick();
         }
 
         private void bt_newsearch_Click(object sender, EventArgs e)
@@ -170,5 +210,14 @@ namespace TrafficSchedules
             dgv_connections.Columns.Clear();
 
         }
+
+        public void clearDGVEntries()
+        {
+            //clear previous entries
+            dgv_connections.Rows.Clear();
+            dgv_connections.Columns.Clear();
+        }
+
+        
     }
 }
