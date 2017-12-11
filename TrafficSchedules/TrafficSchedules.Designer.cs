@@ -35,7 +35,6 @@
             this.tb_start = new System.Windows.Forms.TextBox();
             this.tb_destination = new System.Windows.Forms.TextBox();
             this.grpbox_selection = new System.Windows.Forms.GroupBox();
-            this.rb_nearme = new System.Windows.Forms.RadioButton();
             this.rb_departure = new System.Windows.Forms.RadioButton();
             this.rb_connections = new System.Windows.Forms.RadioButton();
             this.lbox_stations = new System.Windows.Forms.ListBox();
@@ -72,18 +71,18 @@
             // 
             // tb_start
             // 
-            this.tb_start.Location = new System.Drawing.Point(94, 45);
+            this.tb_start.Location = new System.Drawing.Point(78, 45);
             this.tb_start.Name = "tb_start";
-            this.tb_start.Size = new System.Drawing.Size(200, 20);
+            this.tb_start.Size = new System.Drawing.Size(228, 20);
             this.tb_start.TabIndex = 1;
             this.tb_start.Click += new System.EventHandler(this.tb_start_Click);
             this.tb_start.TextChanged += new System.EventHandler(this.tb_start_TextChanged);
             // 
             // tb_destination
             // 
-            this.tb_destination.Location = new System.Drawing.Point(94, 102);
+            this.tb_destination.Location = new System.Drawing.Point(78, 102);
             this.tb_destination.Name = "tb_destination";
-            this.tb_destination.Size = new System.Drawing.Size(200, 20);
+            this.tb_destination.Size = new System.Drawing.Size(228, 20);
             this.tb_destination.TabIndex = 2;
             this.tb_destination.Click += new System.EventHandler(this.tb_destination_Click);
             this.tb_destination.TextChanged += new System.EventHandler(this.tb_destination_TextChanged);
@@ -91,29 +90,18 @@
             // grpbox_selection
             // 
             this.grpbox_selection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.grpbox_selection.Controls.Add(this.rb_nearme);
             this.grpbox_selection.Controls.Add(this.rb_departure);
             this.grpbox_selection.Controls.Add(this.rb_connections);
-            this.grpbox_selection.Location = new System.Drawing.Point(794, 45);
+            this.grpbox_selection.Location = new System.Drawing.Point(794, 48);
             this.grpbox_selection.Name = "grpbox_selection";
-            this.grpbox_selection.Size = new System.Drawing.Size(246, 95);
+            this.grpbox_selection.Size = new System.Drawing.Size(246, 70);
             this.grpbox_selection.TabIndex = 4;
             this.grpbox_selection.TabStop = false;
-            // 
-            // rb_nearme
-            // 
-            this.rb_nearme.AutoSize = true;
-            this.rb_nearme.Location = new System.Drawing.Point(0, 59);
-            this.rb_nearme.Name = "rb_nearme";
-            this.rb_nearme.Size = new System.Drawing.Size(96, 17);
-            this.rb_nearme.TabIndex = 6;
-            this.rb_nearme.Text = "in meiner Nähe";
-            this.rb_nearme.UseVisualStyleBackColor = true;
             // 
             // rb_departure
             // 
             this.rb_departure.AutoSize = true;
-            this.rb_departure.Location = new System.Drawing.Point(0, 37);
+            this.rb_departure.Location = new System.Drawing.Point(0, 42);
             this.rb_departure.Name = "rb_departure";
             this.rb_departure.Size = new System.Drawing.Size(147, 17);
             this.rb_departure.TabIndex = 5;
@@ -125,7 +113,7 @@
             // 
             this.rb_connections.AutoSize = true;
             this.rb_connections.Checked = true;
-            this.rb_connections.Location = new System.Drawing.Point(0, 14);
+            this.rb_connections.Location = new System.Drawing.Point(0, 19);
             this.rb_connections.Name = "rb_connections";
             this.rb_connections.Size = new System.Drawing.Size(91, 17);
             this.rb_connections.TabIndex = 4;
@@ -140,9 +128,10 @@
             this.lbox_stations.FormattingEnabled = true;
             this.lbox_stations.Location = new System.Drawing.Point(349, 45);
             this.lbox_stations.Name = "lbox_stations";
-            this.lbox_stations.Size = new System.Drawing.Size(389, 95);
+            this.lbox_stations.Size = new System.Drawing.Size(389, 121);
             this.lbox_stations.TabIndex = 3;
             this.lbox_stations.Click += new System.EventHandler(this.lbox_stations_Click);
+            this.lbox_stations.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbox_stations_KeyDown);
             // 
             // bt_newsearch
             // 
@@ -171,7 +160,7 @@
             // 
             this.picbox_switchendstart.Image = ((System.Drawing.Image)(resources.GetObject("picbox_switchendstart.Image")));
             this.picbox_switchendstart.InitialImage = ((System.Drawing.Image)(resources.GetObject("picbox_switchendstart.InitialImage")));
-            this.picbox_switchendstart.Location = new System.Drawing.Point(180, 71);
+            this.picbox_switchendstart.Location = new System.Drawing.Point(172, 71);
             this.picbox_switchendstart.Name = "picbox_switchendstart";
             this.picbox_switchendstart.Size = new System.Drawing.Size(25, 25);
             this.picbox_switchendstart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -181,6 +170,7 @@
             // 
             // dgv_connections
             // 
+            this.dgv_connections.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_connections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_connections.Location = new System.Drawing.Point(16, 197);
             this.dgv_connections.Name = "dgv_connections";
@@ -190,7 +180,7 @@
             // lb_date
             // 
             this.lb_date.AutoSize = true;
-            this.lb_date.Location = new System.Drawing.Point(13, 154);
+            this.lb_date.Location = new System.Drawing.Point(12, 152);
             this.lb_date.Name = "lb_date";
             this.lb_date.Size = new System.Drawing.Size(44, 13);
             this.lb_date.TabIndex = 12;
@@ -198,11 +188,11 @@
             // 
             // datetimepicker
             // 
-            this.datetimepicker.CustomFormat = "dd.MM.yy HH:mm U\'h\'r";
+            this.datetimepicker.CustomFormat = "dd-MM-yyyy HH:mm";
             this.datetimepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datetimepicker.Location = new System.Drawing.Point(94, 154);
+            this.datetimepicker.Location = new System.Drawing.Point(78, 146);
             this.datetimepicker.Name = "datetimepicker";
-            this.datetimepicker.Size = new System.Drawing.Size(200, 20);
+            this.datetimepicker.Size = new System.Drawing.Size(228, 20);
             this.datetimepicker.TabIndex = 13;
             // 
             // TrafficSchedules
@@ -244,7 +234,6 @@
         private System.Windows.Forms.TextBox tb_start;
         private System.Windows.Forms.TextBox tb_destination;
         private System.Windows.Forms.GroupBox grpbox_selection;
-        private System.Windows.Forms.RadioButton rb_nearme;
         private System.Windows.Forms.RadioButton rb_departure;
         private System.Windows.Forms.RadioButton rb_connections;
         private System.Windows.Forms.ListBox lbox_stations;

@@ -74,7 +74,8 @@ namespace TrafficSchedules
 
         public void showConnections(String startpoint, String endpoint)
         {
-            Connections conlist = route.GetConnections(startpoint, endpoint);
+
+            Connections conlist = route.GetConnections(startpoint, endpoint, getDate(), getTime());
 
             //clear previous entries
             clearDGVEntries();
@@ -113,11 +114,11 @@ namespace TrafficSchedules
         {
             
             String departurestation = tb_start.Text;
-            StationBoardRoot sbroot = route.GetStationBoard(departurestation);
+            StationBoardRoot sbroot = route.GetStationBoard(departurestation, getDate() + getTime());
 
             clearDGVEntries();
 
-            String[] stationboardcolumns = new String[] { "Abfahrt", "Nach", "Linie", "Betreiber" };
+            String[] stationboardcolumns = new String[] { "Abfahrt", "Nach", "Nummer", "Gleis", "Betreiber" };
             CreateDataGridViewColumns(stationboardcolumns);
 
             foreach (StationBoard sb in sbroot.Entries)
@@ -126,9 +127,10 @@ namespace TrafficSchedules
 
                 String[] stationboardproperties = new String[]
                 {
-                    sb.Stop.Departure.ToShortTimeString(),
+                    sb.Stop.Departure.ToShortTimeString(),                  
                     sb.To,
                     sb.Number,
+                    sb.Stop.Platform,                   
                     sb.Operator
                 };
 
@@ -160,9 +162,29 @@ namespace TrafficSchedules
             }
         }
 
+        public String getTime()
+        {
+
+            return datetimepicker.Value.ToString("HH:mm");
+        }
+
+        public String getDate()
+        {
+            return datetimepicker.Value.ToString("yyyy-MM-dd");
+        }
+
+        //listbox stations events
         private void lbox_stations_Click(object sender, EventArgs e)
         {
             activetextbox.Text = lbox_stations.SelectedItem.ToString();
+        }
+
+        private void lbox_stations_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                activetextbox.Text = lbox_stations.SelectedItem.ToString();
+            }
         }
 
         private void bt_show_Click(object sender, EventArgs e)
